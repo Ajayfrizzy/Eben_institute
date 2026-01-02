@@ -1,8 +1,7 @@
 // app/api/waitlist/route.js
-import { prisma } from '@/lib/db'
+import { waitlistDb } from '@/lib/database'
 import { sendVerificationEmail } from '@/lib/email'
 import { z } from 'zod'
-import crypto from 'crypto'
 
 const waitlistSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -25,12 +24,10 @@ export async function POST(request) {
     const { email, name } = validationResult.data
     
     // Check if email already exists
-    const existing = await prisma.waitlist.findUnique({
-      where: { email }
-    })
+    const existing = await waitlistDb.checkEmailExists(email)
     
     if (existing) {
-      if (existing.isVerified) {
+      if (existing.is_verified) {
         return Response.json(
           { error: 'Email is already subscribed and verified' },
           { status: 400 }
@@ -38,16 +35,8 @@ export async function POST(request) {
       }
       
       // If not verified, update and resend verification
-      const verificationToken = crypto.randomBytes(32).toString('hex')
-      const tokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000) // 24 hours
-      
-      await prisma.waitlist.update({
-        where: { email },
-        data: {
-          verificationToken,
-          tokenExpires
-        }
-      })
+      const verificationToken = Math.random().toString(36).substring(2) + Date.now().toString(36)
+      await waitlistDb.updateVerificationToken(email, verificationToken)
       
       await sendVerificationEmail(email, name, verificationToken)
       
@@ -58,17 +47,7 @@ export async function POST(request) {
     }
     
     // Create new waitlist entry
-    const verificationToken = crypto.randomBytes(32).toString('hex')
-    const tokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000)
-    
-    await prisma.waitlist.create({
-      data: {
-        email,
-        name,
-        verificationToken,
-        tokenExpires
-      }
-    })
+    const { verificationToken } = await waitlistDb.subscribe(email, name)
     
     // Send verification email
     await sendVerificationEmail(email, name, verificationToken)
@@ -81,7 +60,7 @@ export async function POST(request) {
   } catch (error) {
     console.error('Waitlist subscription error:', error)
     
-    if (error.code === 'P2002') {
+    if (error.message === 'EMAIL_EXISTS') {
       return Response.json(
         { error: 'Email is already subscribed' },
         { status: 400 }
@@ -98,10 +77,7 @@ export async function POST(request) {
 // Get waitlist count (public)
 export async function GET() {
   try {
-    const count = await prisma.waitlist.count({
-      where: { isVerified: true }
-    })
-    
+    const count = await waitlistDb.getCount()
     return Response.json({ count })
   } catch (error) {
     console.error('Error getting waitlist count:', error)

@@ -1,23 +1,17 @@
 // app/api/admin/waitlist/route.js
-import { prisma } from '@/lib/db'
+import { waitlistDb } from '@/lib/database'
 
-// Middleware to check for admin authentication
+// Simple admin check
 function isAdmin(request) {
-  // In production, implement proper authentication
   const authHeader = request.headers.get('authorization')
+  const adminToken = process.env.ADMIN_TOKEN || 'temp-admin-token-12345'
   
-  // Simple check for demo - replace with proper auth in production
-  if (!authHeader || authHeader !== `Bearer ${process.env.ADMIN_TOKEN}`) {
-    return false
-  }
-  
-  return true
+  return authHeader === `Bearer ${adminToken}`
 }
 
-// GET all waitlist subscribers (admin only)
+// GET all waitlist subscribers
 export async function GET(request) {
   try {
-    // Check admin authentication
     if (!isAdmin(request)) {
       return Response.json(
         { error: 'Unauthorized' },
@@ -31,63 +25,22 @@ export async function GET(request) {
     const verified = searchParams.get('verified')
     const search = searchParams.get('search')
     
-    const skip = (page - 1) * limit
+    const filters = {}
+    if (verified !== null) filters.verified = verified === 'true'
+    if (search) filters.search = search
     
-    // Build filter conditions
-    const where = {}
-    
-    if (verified !== null) {
-      where.isVerified = verified === 'true'
-    }
-    
-    if (search) {
-      where.OR = [
-        { email: { contains: search, mode: 'insensitive' } },
-        { name: { contains: search, mode: 'insensitive' } }
-      ]
-    }
-    
-    // Get subscribers with pagination
-    const [subscribers, total] = await Promise.all([
-      prisma.waitlist.findMany({
-        where,
-        skip,
-        take: limit,
-        orderBy: { subscribedAt: 'desc' },
-        select: {
-          id: true,
-          email: true,
-          name: true,
-          subscribedAt: true,
-          isVerified: true,
-          verifiedAt: true
-        }
-      }),
-      prisma.waitlist.count({ where })
-    ])
-    
-    // Get statistics
-    const stats = await prisma.waitlist.aggregate({
-      where: { isVerified: true },
-      _count: true,
-      _min: { subscribedAt: true },
-      _max: { subscribedAt: true }
-    })
+    const result = await waitlistDb.getAllSubscribers(page, limit, filters)
+    const stats = await waitlistDb.getStats()
     
     return Response.json({
-      subscribers,
+      subscribers: result.subscribers,
       pagination: {
-        page,
-        limit,
-        total,
-        totalPages: Math.ceil(total / limit)
+        page: result.page,
+        limit: result.limit,
+        total: result.total,
+        totalPages: result.totalPages
       },
-      stats: {
-        totalSubscribers: await prisma.waitlist.count(),
-        verifiedSubscribers: stats._count,
-        firstSubscription: stats._min.subscribedAt,
-        latestSubscription: stats._max.subscribedAt
-      }
+      stats
     })
     
   } catch (error) {
@@ -99,10 +52,9 @@ export async function GET(request) {
   }
 }
 
-// DELETE a subscriber (admin only)
+// DELETE subscriber
 export async function DELETE(request) {
   try {
-    // Check admin authentication
     if (!isAdmin(request)) {
       return Response.json(
         { error: 'Unauthorized' },
@@ -112,99 +64,23 @@ export async function DELETE(request) {
     
     const { searchParams } = new URL(request.url)
     const id = searchParams.get('id')
-    const email = searchParams.get('email')
     
-    if (!id && !email) {
+    if (!id) {
       return Response.json(
-        { error: 'ID or email is required' },
+        { error: 'ID is required' },
         { status: 400 }
       )
     }
     
-    const where = id ? { id } : { email }
-    
-    const deleted = await prisma.waitlist.delete({
-      where
-    })
+    await waitlistDb.deleteSubscriber(id)
     
     return Response.json({
       success: true,
-      message: 'Subscriber deleted successfully',
-      data: deleted
+      message: 'Subscriber deleted successfully'
     })
     
   } catch (error) {
     console.error('Delete subscriber error:', error)
-    
-    if (error.code === 'P2025') {
-      return Response.json(
-        { error: 'Subscriber not found' },
-        { status: 404 }
-      )
-    }
-    
-    return Response.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    )
-  }
-}
-
-// POST to resend verification email (admin only)
-export async function POST(request) {
-  try {
-    // Check admin authentication
-    if (!isAdmin(request)) {
-      return Response.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      )
-    }
-    
-    const { email } = await request.json()
-    
-    if (!email) {
-      return Response.json(
-        { error: 'Email is required' },
-        { status: 400 }
-      )
-    }
-    
-    const subscriber = await prisma.waitlist.findUnique({
-      where: { email }
-    })
-    
-    if (!subscriber) {
-      return Response.json(
-        { error: 'Subscriber not found' },
-        { status: 404 }
-      )
-    }
-    
-    // Generate new verification token
-    const crypto = await import('crypto')
-    const verificationToken = crypto.randomBytes(32).toString('hex')
-    const tokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000)
-    
-    await prisma.waitlist.update({
-      where: { email },
-      data: {
-        verificationToken,
-        tokenExpires
-      }
-    })
-    
-    // Import email function
-    const { sendVerificationEmail } = await import('@/lib/email')
-    await sendVerificationEmail(email, subscriber.name, verificationToken)
-    
-    return Response.json({
-      success: true,
-      message: 'Verification email resent successfully'
-    })
-    
-  } catch (error) {
-    console.error('Resend verification error:', error)
     return Response.json(
       { error: 'Internal server error' },
       { status: 500 }
