@@ -7,10 +7,10 @@ export default function AboutPage() {
   return (
     <LayoutWrapper>
       {/* Hero */}
-      <section className="bg-linear-to-r from-blue-600 to-indigo-700 text-white py-20">
+      <section className="bg-linear-to-r from-[#5fa336] to-[#487d2c] text-white py-20">
         <div className="container-custom text-center">
           <h1 className="text-5xl font-bold mb-6">About Us</h1>
-          <p className="text-xl max-w-3xl mx-auto">
+          <p className="text-xl max-w-3xl mx-auto text-white/90">
             Learn about our journey, values, and commitment to creating positive change
           </p>
         </div>

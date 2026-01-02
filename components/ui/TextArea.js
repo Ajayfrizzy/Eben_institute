@@ -32,7 +32,7 @@ const Textarea = React.forwardRef(function Textarea({
         className={clsx(
           'block w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900',
           'placeholder:text-gray-500',
-          'focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none',
+          'focus:border-[#5fa336] focus:ring-2 focus:ring-[#94de61]/30 focus:outline-none',
           'transition-colors duration-200',
           'resize-y min-h-25',
           'disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-500',

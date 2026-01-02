@@ -26,7 +26,7 @@ export default function HomePage() {
         <Partners />
         
         {/* Waitlist CTA */}
-        <section className="py-20 bg-linear-to-br from-blue-50 to-indigo-50">
+        <section className="py-20 bg-linear-to-br from-[#f4fce9] to-[#e5f8c9]">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="grid md:grid-cols-2 gap-12 items-center">

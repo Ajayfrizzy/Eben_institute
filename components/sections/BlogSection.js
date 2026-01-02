@@ -1,6 +1,30 @@
 // components/sections/BlogSection.js
+'use client'
+
 import Link from 'next/link'
 import { Calendar, Clock, ArrowRight } from 'lucide-react'
+import { motion } from 'framer-motion'
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5
+    }
+  }
+}
 
 export default function BlogSection() {
   const blogPosts = [
@@ -45,24 +69,38 @@ export default function BlogSection() {
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+        <motion.div 
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Latest From Our Blog
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-700 max-w-2xl mx-auto">
             Insights, stories, and updates from our journey of creating positive change
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <motion.div 
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           {blogPosts.map((post) => (
-            <div
+            <motion.div
               key={post.id}
               className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow duration-300"
+              variants={itemVariants}
+              whileHover={{ y: -5 }}
             >
               <div className="p-6">
                 <div className="text-4xl mb-4">{post.image}</div>
-                <span className="inline-block px-3 py-1 text-xs font-semibold text-blue-600 bg-blue-50 rounded-full mb-3">
+                <span className="inline-block px-3 py-1 text-xs font-semibold text-[#5fa336] bg-[#f4fce9] rounded-full mb-3">
                   {post.category}
                 </span>
                 <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
@@ -89,17 +127,23 @@ export default function BlogSection() {
                 </div>
                 <Link
                   href={`/blog/${post.id}`}
-                  className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 group"
+                  className="inline-flex items-center text-[#5fa336] font-semibold hover:text-[#487d2c] group"
                 >
                   Read More
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="text-center">
+        <motion.div 
+          className="text-center"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
           <div className="inline-flex flex-col sm:flex-row gap-4 items-center">
             <a
               href="https://medium.com/@ebeninstitute"
@@ -114,13 +158,13 @@ export default function BlogSection() {
             </a>
             <Link
               href="/marketing/blog"
-              className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700"
+              className="inline-flex items-center text-[#5fa336] font-semibold hover:text-[#487d2c]"
             >
               View All Articles
               <ArrowRight className="w-4 h-4 ml-2" />
             </Link>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

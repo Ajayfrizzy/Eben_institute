@@ -22,10 +22,10 @@ export default function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/marketing" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-linear-to-br from-[#94de61] to-[#5fa336] rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-xl">EI</span>
             </div>
-            <span className="text-2xl font-bold text-gray-800">Eben Institute</span>
+            <span className="text-2xl font-bold text-green-900">Eben Institute</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -34,14 +34,14 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-600 hover:text-blue-600 font-medium transition-colors"
+                className="text-green-900 hover:border-b-2 hover:border-[#5fa336] hover:text-[#1a4a01] font-medium transition-all"
               >
                 {item.name}
               </Link>
             ))}
             <Link
               href="/marketing/membership"
-              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              className="bg-linear-to-r from-[#94de61] to-[#5fa336] text-white px-6 py-2 font-semibold rounded-lg hover:bg-[#487d2c] hover:text-[#1a4a01] transition-all"
             >
               Join Waitlist
             </Link>
@@ -64,7 +64,7 @@ export default function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-gray-600 hover:text-blue-600 font-medium py-2"
+                  className="text-gray-700 hover:text-gray-900 font-medium py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
@@ -72,7 +72,7 @@ export default function Header() {
               ))}
               <Link
                 href="/marketing/membership"
-                className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 text-center"
+                className="bg-linear-to-r from-[#94de61] to-[#5fa336] text-white px-6 py-2 rounded-lg hover:from-[#7bc94a] hover:to-[#487d2c] text-center"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Join Waitlist

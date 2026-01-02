@@ -42,7 +42,7 @@ export default function VerifyPage({ params }) {
       <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8 text-center">
         {status === 'loading' && (
           <>
-            <Loader2 className="w-16 h-16 text-blue-600 animate-spin mx-auto mb-6" />
+            <Loader2 className="w-16 h-16 text-[#5fa336] animate-spin mx-auto mb-6" />
             <h1 className="text-2xl font-bold text-gray-900 mb-4">
               Verifying your email...
             </h1>
@@ -66,7 +66,7 @@ export default function VerifyPage({ params }) {
             </p>
             <Link
               href="/"
-              className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+              className="inline-block bg-[#5fa336] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#487d2c] transition-colors"
             >
               Go to Homepage
             </Link>
@@ -85,13 +85,13 @@ export default function VerifyPage({ params }) {
             <div className="space-y-3">
               <Link
                 href="/marketing/membership"
-                className="block bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                className="block bg-[#5fa336] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#487d2c] transition-colors"
               >
                 Try Joining Again
               </Link>
               <Link
                 href="/marketing"
-                className="block text-blue-600 font-semibold hover:text-blue-700"
+                className="block text-[#5fa336] font-semibold hover:text-[#487d2c]"
               >
                 Go to Homepage
               </Link>

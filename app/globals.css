@@ -17,7 +17,7 @@
   @reference "tailwindcss";
   
   .btn-primary {
-    @apply bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 hover:shadow-lg;
+    @apply bg-[#94de61] text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-[#7bc94a] transition-all duration-300 hover:shadow-lg;
   }
   
   .btn-secondary {
@@ -33,6 +33,14 @@
   }
   
   .gradient-text {
-    @apply bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent;
+    @apply bg-linear-to-r from-[#94de61] to-[#5fa336] bg-clip-text text-transparent;
+  }
+  
+  .eben-green {
+    color: rgb(148, 222, 97);
+  }
+  
+  .bg-eben-green {
+    background-color: rgb(148, 222, 97);
   }
 }

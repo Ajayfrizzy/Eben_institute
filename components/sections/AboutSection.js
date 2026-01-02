@@ -1,33 +1,51 @@
 // components/sections/AboutSection.js
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 
 export default function AboutSection() {
   return (
     <section className="section-padding bg-white">
       <div className="container-custom">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
               About Eben Institute
             </h2>
             
             <p className="text-gray-600 mb-6 text-lg">
-              Founded with a vision to transform communities through sustainable development, 
-              Eben Institute is a non-profit organization dedicated to creating opportunities 
-              where they are needed most.
+              We exist to shape the next generation of leaders by equipping them with the right 
+              knowledge, resources, and strategic networks they need to thrive and make meaningful impact.
             </p>
             
-            <p className="text-gray-600 mb-8 text-lg">
-              We believe in the power of education, skill development, and community 
-              engagement to break cycles of poverty and create lasting change.
-            </p>
+            <motion.p 
+              className="text-[#5fa336] font-semibold mb-8 text-lg italic"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              A transformed mind, a transformed people, a transformed society.
+            </motion.p>
             
             <div className="space-y-4 mb-8">
-              <div className="flex items-start">
+              <motion.div 
+                className="flex items-start"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+              >
                 <div className="shrink-0 mt-1">
-                  <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
-                    <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <div className="w-6 h-6 rounded-full bg-[#94de61]/30 flex items-center justify-center">
+                    <svg className="w-3 h-3 text-[#5fa336]" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
@@ -35,12 +53,18 @@ export default function AboutSection() {
                 <p className="ml-3 text-gray-700">
                   Community-centered approach to development
                 </p>
-              </div>
+              </motion.div>
               
-              <div className="flex items-start">
+              <motion.div 
+                className="flex items-start"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.3 }}
+              >
                 <div className="shrink-0 mt-1">
-                  <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
-                    <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <div className="w-6 h-6 rounded-full bg-[#94de61]/30 flex items-center justify-center">
+                    <svg className="w-3 h-3 text-[#5fa336]" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
@@ -48,12 +72,18 @@ export default function AboutSection() {
                 <p className="ml-3 text-gray-700">
                   Sustainable and scalable programs
                 </p>
-              </div>
+              </motion.div>
               
-              <div className="flex items-start">
+              <motion.div 
+                className="flex items-start"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.4 }}
+              >
                 <div className="shrink-0 mt-1">
-                  <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
-                    <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <div className="w-6 h-6 rounded-full bg-[#94de61]/30 flex items-center justify-center">
+                    <svg className="w-3 h-3 text-[#5fa336]" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
@@ -61,24 +91,37 @@ export default function AboutSection() {
                 <p className="ml-3 text-gray-700">
                   Partnerships with local organizations
                 </p>
-              </div>
+              </motion.div>
             </div>
             
-            <Link
-              href="/marketing/about"
-              className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700"
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.5 }}
             >
-              Learn more about us
-              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </Link>
-          </div>
+              <Link
+                href="/marketing/about"
+                className="inline-flex items-center text-[#5fa336] font-semibold hover:text-[#487d2c] transition-colors"
+              >
+                Learn more about us
+                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </Link>
+            </motion.div>
+          </motion.div>
           
-          <div className="relative">
-            <div className="bg-linear-to-br from-blue-500 to-purple-600 rounded-2xl p-1">
+          <motion.div 
+            className="relative"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="bg-linear-to-br from-[#94de61] to-[#5fa336] rounded-2xl p-1">
               <div className="bg-white rounded-xl p-6 h-full">
-                <div className="aspect-video bg-linear-to-br from-blue-50 to-indigo-100 rounded-lg flex items-center justify-center">
+                <div className="aspect-video bg-linear-to-br from-[#f4fce9] to-[#e5f8c9] rounded-lg flex items-center justify-center">
                   <div className="text-center p-8">
                     <div className="text-5xl mb-4">🌟</div>
                     <h3 className="text-xl font-bold text-gray-800 mb-2">Our Impact</h3>
@@ -89,22 +132,34 @@ export default function AboutSection() {
                 </div>
                 
                 <div className="mt-6 grid grid-cols-3 gap-4">
-                  <div className="text-center p-4 bg-blue-50 rounded-lg">
-                    <div className="text-2xl font-bold text-blue-600">5+</div>
+                  <motion.div 
+                    className="text-center p-4 bg-[#f4fce9] rounded-lg"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <div className="text-2xl font-bold text-[#5fa336]">5+</div>
                     <div className="text-sm text-gray-600">Years</div>
-                  </div>
-                  <div className="text-center p-4 bg-green-50 rounded-lg">
-                    <div className="text-2xl font-bold text-green-600">15+</div>
+                  </motion.div>
+                  <motion.div 
+                    className="text-center p-4 bg-[#e5f8c9] rounded-lg"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <div className="text-2xl font-bold text-[#5fa336]">15+</div>
                     <div className="text-sm text-gray-600">Projects</div>
-                  </div>
-                  <div className="text-center p-4 bg-purple-50 rounded-lg">
-                    <div className="text-2xl font-bold text-purple-600">1000+</div>
+                  </motion.div>
+                  <motion.div 
+                    className="text-center p-4 bg-[#cdf19a] rounded-lg"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <div className="text-2xl font-bold text-[#487d2c]">1000+</div>
                     <div className="text-sm text-gray-600">Lives Impacted</div>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
