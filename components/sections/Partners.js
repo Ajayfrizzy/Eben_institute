@@ -2,6 +2,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { Landmark, Handshake, Monitor, BookOpen, Sprout } from 'lucide-react'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -26,11 +27,11 @@ const itemVariants = {
 
 export default function Partners() {
   const partners = [
-    { name: 'UNESCO', logo: '🏛️' },
-    { name: 'Local Community Org', logo: '🤝' },
-    { name: 'Tech for Good', logo: '💻' },
-    { name: 'Education First', logo: '📚' },
-    { name: 'Sustainable Dev Corp', logo: '🌱' },
+    { name: 'UNESCO', icon: <Landmark className="w-8 h-8 text-[#5fa336]" /> },
+    { name: 'Local Community Org', icon: <Handshake className="w-8 h-8 text-[#5fa336]" /> },
+    { name: 'Tech for Good', icon: <Monitor className="w-8 h-8 text-[#5fa336]" /> },
+    { name: 'Education First', icon: <BookOpen className="w-8 h-8 text-[#5fa336]" /> },
+    { name: 'Sustainable Dev Corp', icon: <Sprout className="w-8 h-8 text-[#5fa336]" /> },
   ]
   
   return (
@@ -66,7 +67,7 @@ export default function Partners() {
                 variants={itemVariants}
                 whileHover={{ scale: 1.05, y: -5 }}
               >
-                <div className="text-3xl mb-3">{partner.logo}</div>
+                <div className="w-14 h-14 bg-[#94de61]/20 rounded-xl flex items-center justify-center mb-3">{partner.icon}</div>
                 <div className="text-center font-medium text-gray-700">
                   {partner.name}
                 </div>

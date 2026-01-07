@@ -2,7 +2,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Calendar, Clock, ArrowRight } from 'lucide-react'
+import { Calendar, Clock, ArrowRight, Monitor, BarChart3, Handshake, Rocket } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const containerVariants = {
@@ -35,7 +35,7 @@ export default function BlogSection() {
       date: '2024-01-15',
       readTime: '5 min read',
       category: 'Education',
-      image: '💻'
+      icon: <Monitor className="w-8 h-8 text-[#5fa336]" />
     },
     {
       id: 2,
@@ -44,7 +44,7 @@ export default function BlogSection() {
       date: '2024-01-10',
       readTime: '8 min read',
       category: 'Impact',
-      image: '📊'
+      icon: <BarChart3 className="w-8 h-8 text-[#5fa336]" />
     },
     {
       id: 3,
@@ -53,7 +53,7 @@ export default function BlogSection() {
       date: '2024-01-05',
       readTime: '6 min read',
       category: 'Partnerships',
-      image: '🤝'
+      icon: <Handshake className="w-8 h-8 text-[#5fa336]" />
     },
     {
       id: 4,
@@ -62,7 +62,7 @@ export default function BlogSection() {
       date: '2023-12-28',
       readTime: '7 min read',
       category: 'Innovation',
-      image: '🚀'
+      icon: <Rocket className="w-8 h-8 text-[#5fa336]" />
     },
   ]
 
@@ -99,7 +99,7 @@ export default function BlogSection() {
               whileHover={{ y: -5 }}
             >
               <div className="p-6">
-                <div className="text-4xl mb-4">{post.image}</div>
+                <div className="w-14 h-14 bg-[#94de61]/20 rounded-xl flex items-center justify-center mb-4">{post.icon}</div>
                 <span className="inline-block px-3 py-1 text-xs font-semibold text-[#5fa336] bg-[#f4fce9] rounded-full mb-3">
                   {post.category}
                 </span>

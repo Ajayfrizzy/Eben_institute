@@ -1,7 +1,7 @@
 // app/(marketing)/about/page.js
 import LayoutWrapper from '@/components/layout/LayoutWrapper'
 import MissionSection from '@/components/sections/MissionSection'
-import VisionSection from '@/components/sections/VisionSection'
+import { ShieldCheck, Users, Lightbulb, Sprout, Heart, Rocket } from 'lucide-react'
 
 export default function AboutPage() {
   return (
@@ -11,7 +11,7 @@ export default function AboutPage() {
         <div className="container-custom text-center">
           <h1 className="text-5xl font-bold mb-6">About Us</h1>
           <p className="text-xl max-w-3xl mx-auto text-white/90">
-            Learn about our journey, values, and commitment to creating positive change
+             A transformed mind, a transformed people, a transformed society.
           </p>
         </div>
       </section>
@@ -21,24 +21,12 @@ export default function AboutPage() {
           <div className="container-custom">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Introduction</h2>
-              <div className="prose prose-lg text-gray-600">
+              <div className="prose prose-lg text-gray-600 space-y-5">
                 <p>
-                  Eben Institute was founded in 2018 with a simple yet powerful vision: 
-                  to create opportunities where they are needed most. What started as a 
-                  small community initiative has grown into a respected non-profit 
-                  organization impacting thousands of lives.
+                  Founded in 2018, the Eben Institute was built on the powerful vision of creating opportunity where it is needed most. We have grown from a small community initiative into a respected organization dedicated to transformation. Our mission is to shape the next generation of leaders by equipping them with the right knowledge, resources, and strategic networks they need to thrive and make a meaningful impact.
                 </p>
                 <p>
-                  Our name "Eben" comes from the Hebrew word meaning "stone of help," 
-                  reflecting our commitment to being a solid foundation for communities 
-                  in need. We believe that lasting change comes from empowering 
-                  individuals with education, skills, and opportunities.
-                </p>
-                <p>
-                  Today, we work across multiple communities, focusing on education, 
-                  skill development, economic empowerment, and community building. 
-                  Our approach is holistic, addressing immediate needs while building 
-                  sustainable systems for long-term growth.
+                 Our name, "Eben," meaning "stone of help" in Hebrew, reflects our commitment to being a solid foundation for this work. We believe in the power of a transformed mind to empower a transformed people, and ultimately, to build a transformed society. Through holistic programs in education, skill development, and economic empowerment, we address immediate needs while building sustainable systems for long-term growth and community resilience.
                 </p>
               </div>
             </div>
@@ -46,7 +34,6 @@ export default function AboutPage() {
         </section>
         
         {/* Vision & Mission */}
-        <VisionSection />
         <MissionSection />
         
         {/* Values */}
@@ -61,36 +48,36 @@ export default function AboutPage() {
                 {
                   title: 'Integrity',
                   description: 'We operate with transparency, honesty, and accountability in all our actions.',
-                  icon: '✅'
+                  icon: <ShieldCheck className="w-8 h-8 text-[#5fa336]" />
                 },
                 {
                   title: 'Community First',
                   description: 'Our decisions are guided by what\'s best for the communities we serve.',
-                  icon: '🤝'
+                  icon: <Users className="w-8 h-8 text-[#5fa336]" />
                 },
                 {
                   title: 'Innovation',
                   description: 'We embrace creative solutions to address complex social challenges.',
-                  icon: '💡'
+                  icon: <Lightbulb className="w-8 h-8 text-[#5fa336]" />
                 },
                 {
                   title: 'Sustainability',
                   description: 'We build programs that create lasting impact beyond our involvement.',
-                  icon: '🌱'
+                  icon: <Sprout className="w-8 h-8 text-[#5fa336]" />
                 },
                 {
                   title: 'Inclusion',
                   description: 'We ensure everyone has equal access to opportunities and resources.',
-                  icon: '🌈'
+                  icon: <Heart className="w-8 h-8 text-[#5fa336]" />
                 },
                 {
                   title: 'Collaboration',
                   description: 'We believe in the power of partnerships to amplify our impact.',
-                  icon: '🚀'
+                  icon: <Rocket className="w-8 h-8 text-[#5fa336]" />
                 },
               ].map((value, index) => (
                 <div key={index} className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                  <div className="text-3xl mb-4">{value.icon}</div>
+                  <div className="w-14 h-14 bg-[#94de61]/20 rounded-xl flex items-center justify-center mb-4">{value.icon}</div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3">{value.title}</h3>
                   <p className="text-gray-600">{value.description}</p>
                 </div>

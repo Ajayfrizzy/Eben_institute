@@ -1,6 +1,7 @@
 // app/api/waitlist/route.js
 import { waitlistDb } from '@/lib/database'
 import { sendVerificationEmail } from '@/lib/email'
+import { supabase } from '@/lib/supabase'
 import { z } from 'zod'
 
 const waitlistSchema = z.object({
@@ -10,6 +11,24 @@ const waitlistSchema = z.object({
 
 export async function POST(request) {
   try {
+    // Check if Supabase is configured
+    if (!supabase) {
+      console.error('Supabase is not configured. Please set environment variables.')
+      return Response.json(
+        { error: 'Database not configured. Please contact the administrator.' },
+        { status: 500 }
+      )
+    }
+
+    // Check if Resend is configured
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not configured.')
+      return Response.json(
+        { error: 'Email service not configured. Please contact the administrator.' },
+        { status: 500 }
+      )
+    }
+
     const body = await request.json()
     
     // Validate input
@@ -66,9 +85,17 @@ export async function POST(request) {
         { status: 400 }
       )
     }
+
+    // Check for Supabase table not found error
+    if (error.code === '42P01' || error.message?.includes('relation') || error.message?.includes('does not exist')) {
+      return Response.json(
+        { error: 'Database table not set up. Please run the SQL setup script in Supabase.' },
+        { status: 500 }
+      )
+    }
     
     return Response.json(
-      { error: 'Internal server error' },
+      { error: `Server error: ${error.message || 'Unknown error'}` },
       { status: 500 }
     )
   }

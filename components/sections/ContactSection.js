@@ -35,14 +35,24 @@ export default function ContactSection() {
     setIsSubmitting(true)
     
     try {
-      // Here you would integrate with your contact form API
-      // For now, simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
-      toast.success('Message sent successfully! We\'ll get back to you soon.')
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Something went wrong')
+      }
+
+      toast.success(result.message || 'Message sent successfully! We\'ll get back to you soon.')
       reset()
     } catch (error) {
-      toast.error('Failed to send message. Please try again.')
+      toast.error(error.message || 'Failed to send message. Please try again.')
     } finally {
       setIsSubmitting(false)
     }

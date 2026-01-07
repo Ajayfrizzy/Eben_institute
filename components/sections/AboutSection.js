@@ -4,6 +4,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import { Sparkles } from 'lucide-react'
 
 export default function AboutSection() {
   return (
@@ -123,7 +124,9 @@ export default function AboutSection() {
               <div className="bg-white rounded-xl p-6 h-full">
                 <div className="aspect-video bg-linear-to-br from-[#f4fce9] to-[#e5f8c9] rounded-lg flex items-center justify-center">
                   <div className="text-center p-8">
-                    <div className="text-5xl mb-4">🌟</div>
+                    <div className="w-16 h-16 bg-[#94de61]/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                      <Sparkles className="w-8 h-8 text-[#5fa336]" />
+                    </div>
                     <h3 className="text-xl font-bold text-gray-800 mb-2">Our Impact</h3>
                     <p className="text-gray-600">
                       Transforming lives through sustainable community initiatives
