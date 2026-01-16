@@ -23,6 +23,11 @@ CREATE INDEX IF NOT EXISTS idx_waitlist_verification_token ON waitlist(verificat
 -- Enable Row Level Security (RLS)
 ALTER TABLE waitlist ENABLE ROW LEVEL SECURITY;
 
+-- Drop existing policies if they exist (to avoid conflicts)
+DROP POLICY IF EXISTS "Allow anonymous inserts" ON waitlist;
+DROP POLICY IF EXISTS "Allow anonymous updates for verification" ON waitlist;
+DROP POLICY IF EXISTS "Allow anonymous select" ON waitlist;
+
 -- Policy to allow inserts from anonymous users (for waitlist signup)
 CREATE POLICY "Allow anonymous inserts" ON waitlist
   FOR INSERT
@@ -89,6 +94,11 @@ CREATE INDEX IF NOT EXISTS idx_volunteers_status ON volunteers(status);
 
 -- Enable Row Level Security (RLS)
 ALTER TABLE volunteers ENABLE ROW LEVEL SECURITY;
+
+-- Drop existing policies if they exist (to avoid conflicts)
+DROP POLICY IF EXISTS "Allow anonymous volunteer inserts" ON volunteers;
+DROP POLICY IF EXISTS "Allow authenticated select on volunteers" ON volunteers;
+DROP POLICY IF EXISTS "Allow authenticated updates on volunteers" ON volunteers;
 
 -- Policy to allow inserts from anonymous users (for volunteer signup)
 CREATE POLICY "Allow anonymous volunteer inserts" ON volunteers

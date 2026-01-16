@@ -45,9 +45,9 @@ export default function Footer() {
               <Image
                 src="/eben-logo.png"
                 alt="Eben Institute Logo"
-                width={140}
+                width={150}
                 height={56}
-                className="h-14 w-auto object-contain brightness-0 invert"
+                className="h-20 w-auto object-contain brightness-0 invert"
               />
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-4">

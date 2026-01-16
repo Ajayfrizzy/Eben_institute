@@ -43,9 +43,9 @@ export default function Navbar() {
               <Image
                 src="/eben-logo.png"
                 alt="Eben Institute Logo"
-                width={120}
-                height={48}
-                className="h-12 w-auto object-contain"
+                width={150}
+                height={56}
+                className="h-20 w-auto object-contain"
                 priority
               />
             </Link>
