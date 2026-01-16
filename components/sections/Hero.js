@@ -54,8 +54,8 @@ export default function Hero() {
             className="text-4xl md:text-6xl font-bold text-gray-900 mb-6"
             variants={itemVariants}
           >
-            Empowering Communities Through
-            <span className="block gradient-text">Education & Opportunity</span>
+            Transforming Africa, Raising The Next Generation of&nbsp;
+            <span className="block gradient-text">Problem Solvers</span>
           </motion.h1>
           
           <motion.p 
@@ -63,7 +63,7 @@ export default function Hero() {
             variants={itemVariants}
           >
             Join Eben Institute in our mission to create lasting positive change through 
-            education, skill development, and community empowerment initiatives.
+            education, skill development, and Community Empowerment initiatives.
           </motion.p>
           
           <motion.div 

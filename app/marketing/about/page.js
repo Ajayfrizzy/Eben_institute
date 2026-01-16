@@ -23,7 +23,7 @@ export default function AboutPage() {
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Introduction</h2>
               <div className="prose prose-lg text-gray-600 space-y-5">
                 <p>
-                  Founded in 2018, the Eben Institute was built on the powerful vision of creating opportunity where it is needed most. We have grown from a small community initiative into a respected organization dedicated to transformation. Our mission is to shape the next generation of leaders by equipping them with the right knowledge, resources, and strategic networks they need to thrive and make a meaningful impact.
+                  Founded in October 27th 2025, the Eben Institute was built on the powerful vision of creating opportunity where it is needed most. We have grown from a small community initiative into a respected organization dedicated to transformation. Our mission is to shape the next generation of leaders by equipping them with the right knowledge, resources, and strategic networks they need to thrive and make a meaningful impact.
                 </p>
                 <p>
                  Our name, "Eben," meaning "stone of help" in Hebrew, reflects our commitment to being a solid foundation for this work. We believe in the power of a transformed mind to empower a transformed people, and ultimately, to build a transformed society. Through holistic programs in education, skill development, and economic empowerment, we address immediate needs while building sustainable systems for long-term growth and community resilience.

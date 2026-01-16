@@ -52,7 +52,7 @@ export default function AboutSection() {
                   </div>
                 </div>
                 <p className="ml-3 text-gray-700">
-                  Community-centered approach to development
+                  Covers major SDG alignments especially 4, 8, 9 and 17
                 </p>
               </motion.div>
               
@@ -71,7 +71,7 @@ export default function AboutSection() {
                   </div>
                 </div>
                 <p className="ml-3 text-gray-700">
-                  Sustainable and scalable programs
+                  Community-centered approach
                 </p>
               </motion.div>
               
@@ -90,7 +90,7 @@ export default function AboutSection() {
                   </div>
                 </div>
                 <p className="ml-3 text-gray-700">
-                  Partnerships with local organizations
+                  Local and International Partnerships
                 </p>
               </motion.div>
             </div>
